@@ -1,0 +1,4 @@
+interface:
+  display_name: "PM Review Copilot 中文版"
+  short_description: "中文 PRD 审查、人工检查点和记忆更新"
+  default_prompt: "使用 $pm-review-copilot-zh 审查这份 PRD 的幻觉、冲突和人工检查热点，并在长期上下文变化时手动更新项目记忆。"

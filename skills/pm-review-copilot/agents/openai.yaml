@@ -1,0 +1,4 @@
+interface:
+  display_name: "PM Review Copilot"
+  short_description: "PRD reviews, check hotspots, memory updates"
+  default_prompt: "Use $pm-review-copilot to review this PRD for hallucination, conflicts, and human-check hotspots, then manually update project memory if durable context changed."
