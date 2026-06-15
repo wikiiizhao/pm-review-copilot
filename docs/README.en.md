@@ -49,7 +49,8 @@ PM Review Copilot aims to address the bottleneck of low human review efficiency 
 
 | Capability | Description |
 | --- | --- |
-| Project memory setup | Creates `pm-memory/` with current facts, decisions, evidence, hypotheses, review logs, labeling reviews, user preferences, and handoff notes. |
+| Project memory setup | Creates `project-memory/` with current facts, decisions, evidence, hypotheses, review logs, labeling reviews, user preferences, and handoff notes. |
+| Memory lifecycle management | Marks memory as `pinned`, `active`, `background`, `archived`, `superseded`, `deprecated`, or `needs_review` so stale content does not consume agent context by default. |
 | English and Chinese skills | Use the English skill for English workflows and the Chinese skill for Chinese PM workflows with Chinese templates and reports by default. |
 | Visual review verdict | Uses 🟢🟡🔴 at the top of review outputs to show whether the work passes and how heavy the human review load is. |
 | Product strategy review | Checks whether facts, metrics, causality, decisions, hypotheses, and recommendations are supported by evidence or conflict with project memory. |
@@ -86,7 +87,7 @@ cp -R skills/pm-review-copilot ~/.codex/skills/
 After installing in Codex, you can invoke it like this:
 
 ```text
-Use $pm-review-copilot to initialize pm-memory for this project.
+Use $pm-review-copilot to initialize project-memory for this project.
 ```
 
 ```text
@@ -100,13 +101,13 @@ Use $pm-review-copilot to initialize pm-memory for this project.
 English:
 
 ```text
-Use $pm-review-copilot to initialize pm-memory for this project and ask only the necessary preference questions.
+Use $pm-review-copilot to initialize project-memory for this project and ask only the necessary preference questions.
 ```
 
 Chinese:
 
 ```text
-使用 $pm-review-copilot-zh 为这个项目初始化 pm-memory，并询问我必要的偏好设置。
+使用 $pm-review-copilot-zh 为这个项目初始化 project-memory，并询问我必要的偏好设置。
 ```
 
 You can also run the script directly:
@@ -118,7 +119,7 @@ python3 skills/pm-review-copilot/scripts/init_pm_memory.py --path . --project-na
 ### 2. Review a PRD or Strategy Document
 
 ```text
-Use $pm-review-copilot to review this PRD. Focus on unsupported assertions, metric-definition issues, conflicts with pm-memory, and items that require my confirmation.
+Use $pm-review-copilot to review this PRD. Focus on unsupported assertions, metric-definition issues, conflicts with project-memory, and items that require my confirmation.
 ```
 
 The output includes:
@@ -133,7 +134,7 @@ The output includes:
 ### 3. Manually Update Memory
 
 ```text
-Use $pm-review-copilot to update pm-memory with today's new decisions, evidence, and open questions.
+Use $pm-review-copilot to update project-memory with today's new decisions, evidence, and open questions.
 ```
 
 This skill does not run automatically and does not sync in the background. It updates memory only when the user explicitly asks.

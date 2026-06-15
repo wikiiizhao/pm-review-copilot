@@ -147,7 +147,7 @@ def main() -> int:
             "- Review P1 rows first.",
             "- If one label pair dominates substitutions, revise taxonomy boundaries before scaling more labeling.",
             "- If exact agreement is below the acceptance threshold, run another calibration pass with examples.",
-            "- Record the final report in `pm-memory/LABEL_AUDIT.md`.",
+            "- Record the final report in `project-memory/LABEL_AUDIT.md`.",
         ]
     )
 

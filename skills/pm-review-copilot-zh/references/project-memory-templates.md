@@ -1,6 +1,6 @@
-# PM 记忆模板
+# 项目记忆模板
 
-初始化或修复 `pm-memory/` 工作区时使用这些模板。
+初始化或修复 `project-memory/` 工作区时使用这些模板。
 
 ## 来源设计说明
 
@@ -19,6 +19,7 @@ PM 适配：
 - 增加 `LABEL_AUDIT.md` 记录标注一致性和标签体系问题。
 - 增加 `USER_PREFERENCES.md` 记录 PM 工作风格和审查偏好。
 - 增加 `MEMORY_UPDATE_LOG.md` 记录手动记忆刷新。
+- 增加 `MEMORY_LIFECYCLE.md`，避免过时、已替代、已归档的记忆继续占用默认上下文。
 - 保留 `HUMAN_BRIEF.md` 作为 PM 的注意力界面。
 
 ## CONTEXT_MANIFEST.md
@@ -29,23 +30,25 @@ PM 适配：
 ## 项目
 - 名称：
 - 负责人：
-- 记忆目录：`pm-memory/`
+- 记忆目录：`project-memory/`
 - 文档语言：中文
 
 ## 读取顺序
-1. `RECOVERY_NOTES.md`
-2. `HUMAN_BRIEF.md`
-3. `USER_PREFERENCES.md`
-4. `CURRENT_STATE.md`
-5. `DECISION_LOG.md`
-6. `EVIDENCE_LOG.md`
-7. `HYPOTHESIS_LAB.md`
-8. `REVIEW_LOG.md`
-9. `LABEL_AUDIT.md`
-10. `MEMORY_UPDATE_LOG.md`
+1. `MEMORY_LIFECYCLE.md`
+2. `RECOVERY_NOTES.md`
+3. `HUMAN_BRIEF.md`
+4. `USER_PREFERENCES.md`
+5. `CURRENT_STATE.md`
+6. `DECISION_LOG.md`
+7. `EVIDENCE_LOG.md`
+8. `HYPOTHESIS_LAB.md`
+9. `REVIEW_LOG.md`
+10. `LABEL_AUDIT.md`
+11. `MEMORY_UPDATE_LOG.md`
 
 ## 规范职责
 - 用户风格和审查偏好：`USER_PREFERENCES.md`
+- 记忆生命周期策略和归档索引：`MEMORY_LIFECYCLE.md`
 - 当前事实：`CURRENT_STATE.md`
 - 决策和理由：`DECISION_LOG.md`
 - 证据和来源检查：`EVIDENCE_LOG.md`
@@ -67,6 +70,12 @@ PM 适配：
 
 合并冲突前先报告。
 
+## 生命周期规则
+- 默认读取状态：`pinned`、`active`。
+- 只有相关时才读取 `background`。
+- 默认不读取 `archived`、`superseded`、`deprecated`。
+- 未经用户明确同意，不删除长期记忆。
+
 ## 忽略
 - `.git/`
 - `node_modules/`
@@ -75,6 +84,48 @@ PM 适配：
 - `.cache/`
 - `tmp/`
 - 生成导出物，除非用户明确要求
+```
+
+## MEMORY_LIFECYCLE.md
+
+```markdown
+# 记忆生命周期
+
+这个文件用于让项目记忆长期保持可用。记忆不是无限追加的记录堆：随着项目变化，旧记忆应该被提升、降权、归档或标记为已被替代。
+
+## 状态定义
+| 状态 | 默认读取？ | 含义 |
+| --- | --- | --- |
+| `pinned` | 是 | 长期高价值上下文，应始终优先考虑。 |
+| `active` | 是 | 当前工作相关的事实、决策、证据、假设或风险。 |
+| `background` | 仅相关时 | 有历史价值，但不应默认占用上下文。 |
+| `archived` | 否 | 为追溯或审计保留的历史材料。 |
+| `superseded` | 否 | 已被新的事实、决策、指标定义或产物替代。 |
+| `deprecated` | 否 | 已知过时或对当前工作无效。 |
+| `needs_review` | 默认否 | 需要人工确认是保留、归档还是删除。 |
+
+## 默认读取策略
+- 读取与任务相关的 `pinned` 和 `active` 记忆。
+- 只有语义相关或用户要求追溯历史时，才读取 `background` 记忆。
+- 默认跳过 `archived`、`superseded`、`deprecated`。
+
+## 替代关系索引
+| 旧条目 | 状态 | 替代项 | 原因 | 日期 |
+| --- | --- | --- | --- | --- |
+
+## 归档索引
+| 条目 | 来源文件 | 归档原因 | 日期 | 检索说明 |
+| --- | --- | --- | --- | --- |
+
+## 生命周期整理记录
+### YYYY-MM-DD - 整理标题
+- 触发方式/来源：
+- 保持 active：
+- 降为 background：
+- 标记 superseded：
+- 标记 deprecated：
+- 已归档：
+- 需要人工确认：
 ```
 
 ## USER_PREFERENCES.md
@@ -277,6 +328,7 @@ PM 适配：
 - 已提升事实：
 - 仍保留的假设：
 - 发现的冲突或过期信息：
+- 已建议或已执行的生命周期变更：
 - 因不具备长期价值而跳过：
 - 下一次建议刷新时点：
 ```

@@ -1,6 +1,6 @@
-# PM Memory Templates
+# Project Memory Templates
 
-Use these templates when initializing or repairing a `pm-memory/` workspace.
+Use these templates when initializing or repairing a `project-memory/` workspace.
 
 ## Source Design Notes
 
@@ -19,6 +19,7 @@ PM adaptation:
 - Add `LABEL_AUDIT.md` for labeling consistency and taxonomy problems.
 - Add `USER_PREFERENCES.md` for PM working style and review preferences.
 - Add `MEMORY_UPDATE_LOG.md` for manual memory refresh traceability.
+- Add `MEMORY_LIFECYCLE.md` so stale, superseded, and archived memories do not consume default context.
 - Keep `HUMAN_BRIEF.md` as the PM-facing attention surface.
 
 ## CONTEXT_MANIFEST.md
@@ -29,23 +30,25 @@ PM adaptation:
 ## Project
 - Name:
 - Owner:
-- Memory root: `pm-memory/`
+- Memory root: `project-memory/`
 - Documentation language:
 
 ## Read Order
-1. `RECOVERY_NOTES.md`
-2. `HUMAN_BRIEF.md`
-3. `USER_PREFERENCES.md`
-4. `CURRENT_STATE.md`
-5. `DECISION_LOG.md`
-6. `EVIDENCE_LOG.md`
-7. `HYPOTHESIS_LAB.md`
-8. `REVIEW_LOG.md`
-9. `LABEL_AUDIT.md`
-10. `MEMORY_UPDATE_LOG.md`
+1. `MEMORY_LIFECYCLE.md`
+2. `RECOVERY_NOTES.md`
+3. `HUMAN_BRIEF.md`
+4. `USER_PREFERENCES.md`
+5. `CURRENT_STATE.md`
+6. `DECISION_LOG.md`
+7. `EVIDENCE_LOG.md`
+8. `HYPOTHESIS_LAB.md`
+9. `REVIEW_LOG.md`
+10. `LABEL_AUDIT.md`
+11. `MEMORY_UPDATE_LOG.md`
 
 ## Canonical Responsibilities
 - User style and review preferences: `USER_PREFERENCES.md`
+- Memory lifecycle policy and archive index: `MEMORY_LIFECYCLE.md`
 - Current truth: `CURRENT_STATE.md`
 - Decisions and rationale: `DECISION_LOG.md`
 - Evidence and source checks: `EVIDENCE_LOG.md`
@@ -67,6 +70,12 @@ Use this priority for current-truth conflicts:
 
 Report conflicts before merging them.
 
+## Lifecycle Policy
+- Default read statuses: `pinned`, `active`.
+- Read `background` only when relevant.
+- Do not read `archived`, `superseded`, or `deprecated` by default.
+- Do not delete durable memory without explicit user approval.
+
 ## Ignore
 - `.git/`
 - `node_modules/`
@@ -75,6 +84,48 @@ Report conflicts before merging them.
 - `.cache/`
 - `tmp/`
 - generated exports unless explicitly requested
+```
+
+## MEMORY_LIFECYCLE.md
+
+```markdown
+# Memory Lifecycle
+
+Use this file to keep project memory useful over time. Memory is not append-only: it should be promoted, downgraded, archived, or marked as superseded when the project changes.
+
+## Status Definitions
+| Status | Default read? | Meaning |
+| --- | --- | --- |
+| `pinned` | yes | Durable, high-value context that should stay top of mind. |
+| `active` | yes | Current facts, decisions, evidence, assumptions, or risks relevant to ongoing work. |
+| `background` | only if relevant | Useful history that should not consume default context. |
+| `archived` | no | Historical material kept for traceability or audit. |
+| `superseded` | no | Replaced by a newer fact, decision, metric definition, or artifact. |
+| `deprecated` | no | Known stale or invalid for current work. |
+| `needs_review` | no by default | Candidate for promotion, archive, or deletion; requires human confirmation. |
+
+## Default Read Policy
+- Read `pinned` and `active` memory relevant to the task.
+- Read `background` memory only when it is semantically relevant or the user asks for history.
+- Skip `archived`, `superseded`, and `deprecated` by default.
+
+## Supersession Index
+| Old item | Status | Replaced by | Reason | Date |
+| --- | --- | --- | --- | --- |
+
+## Archive Index
+| Item | Source file | Reason archived | Date | Retrieval notes |
+| --- | --- | --- | --- | --- |
+
+## Lifecycle Review Log
+### YYYY-MM-DD - Review title
+- Trigger/source:
+- Kept active:
+- Downgraded to background:
+- Marked superseded:
+- Marked deprecated:
+- Archived:
+- Needs human review:
 ```
 
 ## USER_PREFERENCES.md
@@ -277,6 +328,7 @@ Use this log only for manual, user-triggered memory refreshes.
 - Facts promoted:
 - Hypotheses kept open:
 - Conflicts or stale items found:
+- Lifecycle changes proposed or applied:
 - Skipped as not durable:
 - Next recommended refresh point:
 ```
