@@ -1,0 +1,65 @@
+name: Request a PRD risk review
+description: Ask about the $65 launch offer without sharing confidential documents.
+title: "[Review inquiry] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for your interest. GitHub issues are public. Do not paste or upload a confidential PRD, internal data, credentials, personal information, or private links here.
+
+        This form is only for confirming fit and choosing a private delivery/payment channel.
+  - type: dropdown
+    id: document_type
+    attributes:
+      label: What would you like reviewed?
+      options:
+        - Product requirements document (PRD)
+        - Product or launch strategy
+        - Feature proposal
+        - Revision comparison
+        - Other product document
+    validations:
+      required: true
+  - type: dropdown
+    id: size
+    attributes:
+      label: Approximate size
+      options:
+        - Under 2,000 words
+        - 2,000-5,000 words
+        - Over 5,000 words
+    validations:
+      required: true
+  - type: textarea
+    id: decision
+    attributes:
+      label: What decision should the document support?
+      description: Keep this high-level and non-confidential.
+      placeholder: "Example: decide whether this feature is ready for engineering review."
+    validations:
+      required: true
+  - type: dropdown
+    id: timing
+    attributes:
+      label: Desired timing
+      options:
+        - Within 48 hours
+        - Within one week
+        - Just exploring
+    validations:
+      required: true
+  - type: textarea
+    id: contact
+    attributes:
+      label: Preferred next step
+      description: Name a platform where you would like to continue privately. Do not post an email address if you do not want it public.
+      placeholder: "Example: Please reply here and I will contact you from my Upwork account."
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy confirmation
+      options:
+        - label: I have not included confidential or personal information in this public issue.
+          required: true
